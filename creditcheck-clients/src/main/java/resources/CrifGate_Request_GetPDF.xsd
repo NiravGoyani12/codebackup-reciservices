@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 (x64) (http://www.altova.com) by Vincenzo Iafelice (Crif SpA) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cg="urn:crif-CrifGate:2:1" targetNamespace="urn:crif-CrifGate:2:1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="CG_Req_GetPDF">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Auth">
+					<xs:complexType>
+						<xs:attribute name="orgcode" type="xs:string" use="optional"/>
+						<xs:attribute name="usr" type="xs:string" use="required"/>
+						<xs:attribute name="pwd" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Language" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="EN"/>
+							<xs:enumeration value="IT"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="DetailID" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

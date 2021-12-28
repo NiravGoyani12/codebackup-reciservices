@@ -1,0 +1,1121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2017 sp1 (http://www.altova.com) by Crif SpA (Crif SpA) -->
+<xs:schema xmlns:cb="urn:crif-creditbureau:v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:crif-creditbureau:v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!--===================================-->
+	<!--==========  NAE documents  INI-->
+	<!--========== process documents-->
+	<xs:element name="CB_NAE_ProductInput" type="cb:CB_NAE_ProductInputType"/>
+	<xs:element name="CB_NAE_ProductOutput" type="cb:CB_NAE_ProductOutputType"/>
+	<xs:complexType name="CB_NAE_ProductInputType">
+		<xs:sequence>
+			<xs:element name="CIS" type="cb:NAE_CISInputType"/>
+			<xs:element name="Application" type="cb:ApplicationInputType" minOccurs="0"/>
+			<xs:element name="Link" type="cb:LinkType"/>
+			<xs:element name="ApplicationCodes" type="cb:ApplicationCodesInputType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CB_NAE_ProductOutputType">
+		<xs:sequence>
+			<xs:element name="MessageId" type="cb:MessageIdOutputType" minOccurs="0"/>
+			<xs:element name="EnquiredData" type="cb:NAE_EnquiredDataType" minOccurs="0"/>
+			<xs:element name="ApplicationCodes" type="cb:ApplicationCodesType" minOccurs="0"/>
+			<xs:element name="CreditReport" type="cb:CreditReportType" minOccurs="0"/>
+			<xs:element name="CBScore" type="cb:CBScoreType" minOccurs="0"/>
+			<xs:element name="Error" type="cb:ErrorsType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreditCardInputType">
+		<xs:attribute name="CreditAmountSought" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>FinancedCapital-Credit</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="InstalmentInputType">
+		<xs:attribute name="CreditAmountSought" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Total Financed Amount</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="LinkDescType">
+		<xs:attribute name="RoleOfCISDesc" type="xs:string"/>
+		<xs:attribute name="ConsumerFlagDesc" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="LinkType">
+		<xs:attribute name="RoleOfCIS" type="xs:string"/>
+		<xs:attribute name="ConsumerFlag" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="NAE_EnquiredDataType">
+		<xs:sequence>
+			<xs:element name="CIS" type="cb:CISOutputType"/>
+			<xs:element name="Application" type="cb:ApplicationType"/>
+			<xs:element name="ApplicationDesc" type="cb:ApplicationDescType"/>
+			<xs:element name="Link" type="cb:LinkType"/>
+			<xs:element name="LinkDesc" type="cb:LinkDescType"/>
+		</xs:sequence>
+		<xs:attribute name="CISRefDate" type="xs:date" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="NAE_CISInputType">
+		<xs:choice>
+			<xs:element name="Individual" type="cb:IndividualInputType"/>
+			<xs:element name="Company" type="cb:CompanyInputType"/>
+		</xs:choice>
+		<xs:attribute name="ProviderCISNo" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="NonInstalmentInputType">
+		<xs:attribute name="CreditAmountSought" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>FinancedCapital-Credit</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--===================================-->
+	<!--==========  NAE documents  END-->
+	<!--===================================-->
+	<!---->
+	<!--===================================-->
+	<!--==========  ME documents  INI-->
+	<!--========== process documents-->
+	<xs:element name="CB_ME_ProductInput" type="cb:CB_ME_ProductInputType"/>
+	<xs:element name="CB_ME_ProductOutput" type="cb:CB_ME_ProductOutputType"/>
+	<xs:complexType name="CB_ME_ProductInputType">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="CIS" type="cb:ME_CISInputType"/>
+				<xs:element name="CISCodes" type="cb:ME_CISCodesType"/>
+			</xs:choice>
+			<xs:element name="Purpose" type="cb:PurposeType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CB_ME_ProductOutputType">
+		<xs:sequence>
+			<xs:element name="MessageId" type="cb:MessageIdOutputType" minOccurs="0"/>
+			<xs:element name="EnquiredData" type="cb:ME_EnquiredDataType" minOccurs="0"/>
+			<xs:element name="CreditReport" type="cb:CreditReportType" minOccurs="0"/>
+			<xs:element name="CBScore" type="cb:CBScoreType" minOccurs="0"/>
+			<xs:element name="Error" type="cb:ErrorsType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ME_EnquiredDataType">
+		<xs:choice>
+			<xs:element name="CIS" type="cb:CISOutputType"/>
+			<xs:element name="CISCodes" type="cb:ME_CISCodesType"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="ME_CISCodesType">
+		<xs:attribute name="ProviderCISNo" type="xs:string"/>
+		<xs:attribute name="CCRCISCode" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ME_CISInputType">
+		<xs:choice>
+			<xs:element name="Individual" type="cb:IndividualInputType"/>
+			<xs:element name="Company" type="cb:CompanyInputType"/>
+		</xs:choice>
+		<xs:attribute name="ProviderCISNo" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="PurposeType">
+		<xs:attribute name="PurposeTypeCode" type="xs:string"/>
+	</xs:complexType>
+	<!--===================================-->
+	<!--==========  ME documents  END-->
+	<!--===================================-->
+	<!---->
+	<!--===================================-->
+	<!--==========  AUE documents  INI-->
+	<!--========== process documents-->
+	<xs:element name="CB_AUE_ProductInput" type="cb:CB_AUE_ProductInputType"/>
+	<xs:element name="CB_AUE_ProductOutput" type="cb:CB_AUE_ProductOutputType"/>
+	<xs:complexType name="CB_AUE_ProductInputType">
+		<xs:sequence>
+			<xs:element name="ApplicationToUpdate" type="cb:ApplicationToUpdateType"/>
+			<xs:element name="ApplicationCodes" type="cb:ApplicationCodesInputType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CB_AUE_ProductOutputType">
+		<xs:sequence>
+			<xs:element name="MessageId" type="cb:MessageIdOutputType" minOccurs="0"/>
+			<xs:element name="ApplicationCodes" type="cb:ApplicationCodesType" minOccurs="0"/>
+			<xs:element name="ApplicationDB" type="cb:ApplicationDBType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Data before the update</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ApplicationUpdated" type="cb:ApplicationUpdatedType" minOccurs="0"/>
+			<xs:element name="Error" type="cb:ErrorsType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ApplicationDBType">
+		<xs:sequence>
+			<xs:element name="Application" type="cb:AUE_ApplicationType"/>
+			<xs:element name="ApplicationDesc" type="cb:ApplicationDescType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ApplicationToUpdateType">
+		<xs:attribute name="ContractPhase" type="xs:string"/>
+		<xs:attribute name="Currency" type="xs:string"/>
+		<xs:attribute name="CreditAmountSought" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Total Financed Amount or Credit Limit</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CancellationFlag" type="xs:string"/>
+		<xs:attribute name="MOFLinkCode" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ApplicationUpdatedType">
+		<xs:choice minOccurs="0">
+			<xs:element name="Instalment" type="cb:InstalmentApplicationUpdatedType"/>
+			<xs:element name="NonInstalment" type="cb:NonInstalmentApplicationUpdatedType"/>
+			<xs:element name="CreditCard" type="cb:CreditCardApplicationUpdatedType"/>
+		</xs:choice>
+		<xs:attribute name="ContractPhase" type="xs:string"/>
+		<xs:attribute name="Currency" type="xs:string"/>
+		<xs:attribute name="ContractPhaseDesc" type="xs:string"/>
+		<xs:attribute name="CurrencyDesc" type="xs:string"/>
+		<xs:attribute name="CancellationFlag" type="xs:string"/>
+		<xs:attribute name="MOFLinkCode" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="AUE_ApplicationType">
+		<xs:choice>
+			<xs:element name="Instalment" type="cb:InstalmentType"/>
+			<xs:element name="NonInstalment" type="cb:NonInstalmentType"/>
+			<xs:element name="CreditCard" type="cb:CreditCardType"/>
+		</xs:choice>
+		<xs:attribute name="ProductType" type="xs:string"/>
+		<xs:attribute name="ContractPhase" type="xs:string"/>
+		<xs:attribute name="ContractRequestDate" type="xs:date"/>
+		<xs:attribute name="Currency" type="xs:string"/>
+		<xs:attribute name="MOFLinkCode" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="CreditCardApplicationUpdatedType">
+		<xs:attribute name="CreditAmountSought" type="xs:integer"/>
+	</xs:complexType>
+	<xs:complexType name="InstalmentApplicationUpdatedType">
+		<xs:attribute name="CreditAmountSought" type="xs:integer"/>
+	</xs:complexType>
+	<xs:complexType name="NonInstalmentApplicationUpdatedType">
+		<xs:attribute name="CreditAmountSought" type="xs:integer"/>
+	</xs:complexType>
+	<!--===================================-->
+	<!--==========  AUE documents  END-->
+	<!--===================================-->
+	<!---->
+	<!--===================================-->
+	<!--==========  PAE documents  INI-->
+	<!--========== process documents-->
+	<xs:element name="CB_PAE_ProductInput" type="cb:CB_PAE_ProductInputType"/>
+	<xs:element name="CB_PAE_ProductOutput" type="cb:CB_PAE_ProductOutputType"/>
+	<xs:complexType name="CB_PAE_ProductInputType">
+		<xs:sequence>
+			<xs:element name="ExtractionParameters" type="cb:ExtractionParametersType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CB_PAE_ProductOutputType">
+		<xs:sequence>
+			<xs:element name="MessageId" type="cb:MessageIdOutputType" minOccurs="0"/>
+			<xs:element name="Cardinality" type="cb:CardinalityType" minOccurs="0"/>
+			<xs:element name="Alert" type="cb:AlertType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Error" type="cb:ErrorsType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ExtractionParametersType">
+		<xs:attribute name="StartDate" type="xs:date"/>
+		<xs:attribute name="EndDate" type="xs:date"/>
+		<xs:attribute name="CCRCISCode" type="xs:string"/>
+		<xs:attribute name="AlertCode" type="xs:string"/>
+		<xs:attribute name="DownloadLevel" type="xs:string"/>
+		<xs:attribute name="BranchCode" type="xs:string"/>
+		<xs:attribute name="UserCode" type="xs:string"/>
+		<xs:attribute name="DownloadType" type="xs:string"/>
+		<xs:attribute name="OnlyCardinalityFlag" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="CardinalityType">
+		<xs:attribute name="TotalNumber" type="xs:integer" use="required"/>
+		<xs:attribute name="NumberNeverDownloaded" type="xs:integer" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="AlertType">
+		<xs:sequence>
+			<xs:element name="Subject" type="cb:SubjectNameType"/>
+			<xs:element name="Contract" type="cb:ContractAlertType"/>
+		</xs:sequence>
+		<xs:attribute name="DownloadedFlag" type="xs:boolean" use="required"/>
+		<xs:attribute name="InsertionEventDate" type="xs:dateTime" use="required"/>
+		<xs:attribute name="AlertCode" type="xs:string" use="required"/>
+		<xs:attribute name="AlertCodeDesc" type="xs:string" use="required"/>
+		<xs:attribute name="BranchCode" type="xs:string"/>
+		<xs:attribute name="UserCode" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="SubjectNameType">
+		<xs:attribute name="CCRCISCode" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ContractAlertType">
+		<xs:sequence>
+			<xs:element name="Instalment" type="cb:InstallmentChangeType" minOccurs="0"/>
+			<xs:element name="NotInstalment" type="cb:NotInstallmentChangeType" minOccurs="0"/>
+			<xs:element name="CreditCard" type="cb:CreditCardChangeType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="CCRContractCode" type="xs:string" use="required"/>
+		<xs:attribute name="ProductType" type="xs:string" use="required"/>
+		<xs:attribute name="ContractReferenceDate" type="xs:dateTime" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="InstallmentChangeType">
+		<xs:sequence>
+			<xs:element name="Old" type="cb:InstallmentDBType"/>
+			<xs:element name="New" type="cb:InstallmentDBType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InstallmentDBType">
+		<xs:attribute name="OutstandingBalance" type="xs:integer" use="optional"/>
+		<xs:attribute name="NumberOfPaymentsPastDue" type="xs:integer" use="optional"/>
+		<xs:attribute name="CreditStatus" type="xs:string" use="optional"/>
+		<xs:attribute name="RestructureEvent" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="NotInstallmentChangeType">
+		<xs:sequence>
+			<xs:element name="Old" type="cb:NotInstallmentDBType"/>
+			<xs:element name="New" type="cb:NotInstallmentDBType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NotInstallmentDBType">
+		<xs:attribute name="CreditLimit" type="xs:integer" use="optional"/>
+		<xs:attribute name="OutstandingBalance" type="xs:integer" use="optional"/>
+		<xs:attribute name="CreditStatus" type="xs:string" use="optional"/>
+		<xs:attribute name="RestructureEvent" type="xs:string" use="optional"/>
+		<xs:attribute name="OverdraftExcess" type="xs:integer" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="CreditCardChangeType">
+		<xs:sequence>
+			<xs:element name="Old" type="cb:CreditCardDBType"/>
+			<xs:element name="New" type="cb:CreditCardDBType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreditCardDBType">
+		<xs:attribute name="CreditLimit" type="xs:integer" use="optional"/>
+		<xs:attribute name="OutstandingBalance" type="xs:integer" use="optional"/>
+		<xs:attribute name="NumberOfPaymentsPastDue" type="xs:integer" use="optional"/>
+		<xs:attribute name="CreditStatus" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<!--===================================-->
+	<!--==========  PAE documents  END-->
+	<!--===================================-->
+	<!---->
+	<!--========== Common types INI-->
+	<xs:complexType name="AddressDescType">
+		<xs:attribute name="TypeDesc" type="xs:string"/>
+		<xs:attribute name="CountryDesc" type="xs:string"/>
+		<xs:attribute name="BorrowerNotContactableDesc" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="AddressHistoryType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="Address" type="cb:AddressOutputType"/>
+			<xs:element name="AddressDesc" type="cb:AddressDescType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="FlagCurrent" type="xs:string"/>
+		<xs:attribute name="LastUpdateDate" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="AddressesOutputType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="Address" type="cb:AddressOutputType"/>
+			<xs:element name="AddressDesc" type="cb:AddressDescType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddressOutputType">
+		<xs:attribute name="Type" type="xs:string"/>
+		<xs:attribute name="FullAddress" type="xs:string"/>
+		<xs:attribute name="AddressLine1" type="xs:string"/>
+		<xs:attribute name="AddressLine2" type="xs:string"/>
+		<xs:attribute name="City" type="xs:string"/>
+		<xs:attribute name="PostalCode" type="xs:string"/>
+		<xs:attribute name="County" type="xs:string"/>
+		<xs:attribute name="Eircode" type="xs:string"/>
+		<xs:attribute name="Country" type="xs:string"/>
+		<xs:attribute name="BorrowerNotContactable" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="AddressType">
+		<xs:attribute name="Type" type="xs:string"/>
+		<xs:attribute name="FullAddress" type="xs:string"/>
+		<xs:attribute name="AddressLine1" type="xs:string"/>
+		<xs:attribute name="AddressLine2" type="xs:string"/>
+		<xs:attribute name="City" type="xs:string"/>
+		<xs:attribute name="PostalCode" type="xs:string"/>
+		<xs:attribute name="County" type="xs:string"/>
+		<xs:attribute name="Eircode" type="xs:string"/>
+		<xs:attribute name="Country" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="AggregatedDataType">
+		<xs:attribute name="ContractsNumber" type="xs:integer"/>
+		<xs:attribute name="ReportingCIPsNumber" type="xs:integer"/>
+		<xs:attribute name="TotalOutstanding" type="xs:integer"/>
+		<xs:attribute name="Currency" type="xs:string"/>
+		<xs:attribute name="CurrencyDesc" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ApplicationCodesInputType">
+		<xs:attribute name="CIPContractNo" type="xs:string"/>
+		<xs:attribute name="CIPApplicationNo" type="xs:string"/>
+		<xs:attribute name="CCRContractCode" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ApplicationCodesType">
+		<xs:attribute name="CIPContractNo" type="xs:string"/>
+		<xs:attribute name="CIPApplicationNo" type="xs:string"/>
+		<xs:attribute name="CCRContractCode" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ApplicationDescType">
+		<xs:attribute name="ProductTypeDesc" type="xs:string"/>
+		<xs:attribute name="ContractPhaseDesc" type="xs:string"/>
+		<xs:attribute name="CurrencyDesc" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ApplicationInputType">
+		<xs:choice>
+			<xs:element name="Instalment" type="cb:InstalmentInputType"/>
+			<xs:element name="NonInstalment" type="cb:NonInstalmentInputType"/>
+			<xs:element name="CreditCard" type="cb:CreditCardInputType"/>
+		</xs:choice>
+		<xs:attribute name="ProductType" type="xs:string"/>
+		<xs:attribute name="ContractPhase" type="xs:string"/>
+		<xs:attribute name="ContractRequestDate" type="xs:date"/>
+		<xs:attribute name="Currency" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ApplicationType">
+		<xs:choice>
+			<xs:element name="Instalment" type="cb:InstalmentType"/>
+			<xs:element name="NonInstalment" type="cb:NonInstalmentType"/>
+			<xs:element name="CreditCard" type="cb:CreditCardType"/>
+		</xs:choice>
+		<xs:attribute name="ProductType" type="xs:string"/>
+		<xs:attribute name="ContractPhase" type="xs:string"/>
+		<xs:attribute name="ContractRequestDate" type="xs:date"/>
+		<xs:attribute name="Currency" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="BirthDataDescType">
+		<xs:attribute name="CountryDesc" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="BirthDataInputType">
+		<xs:attribute name="Date" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="BirthDataOutputType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="BirthData" type="cb:BirthDataType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BirthDataType">
+		<xs:attribute name="Date" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="CardsAmountsSummaryType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="BCAmounts" type="cb:CardsAmountsType"/>
+			<xs:element name="GAmounts" type="cb:CardsAmountsType"/>
+		</xs:sequence>
+		<xs:attribute name="NumberOfContracts" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Number of contracts used to calculate amounts</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="CardsAmountsType">
+		<xs:attribute name="CreditLimit" type="xs:integer"/>
+		<xs:attribute name="OutstandingBalance" type="xs:integer"/>
+	</xs:complexType>
+	<xs:complexType name="CardsMaximumType">
+		<xs:attribute name="MaxOutstandingBalance" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Max Residual/remaining amount: high balance</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="MaxOutstandingBalanceDate" type="xs:date"/>
+		<xs:attribute name="MaxOverTheLimitAmount" type="xs:integer"/>
+		<xs:attribute name="MaxOverTheLimitAmountDate" type="xs:date"/>
+		<xs:attribute name="MaxOverduePaymentsNumber" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Maximum overdue Instalments number; max level of default</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="MaxOverduePaymentsNumberDate" type="xs:date"/>
+		<xs:attribute name="MaxChargedAmount" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Max amount charged in the month</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="MaxChargedAmountDate" type="xs:date"/>
+		<xs:attribute name="LastCreditStatus" type="xs:string"/>
+		<xs:attribute name="LastCreditStatusDesc" type="xs:string"/>
+		<xs:attribute name="LastCreditStatusDate" type="xs:date"/>
+		<xs:attribute name="LastRestructureEvent" type="xs:string"/>
+		<xs:attribute name="LastRestructureEventDesc" type="xs:string"/>
+		<xs:attribute name="LastRestructureEventDate" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="CardsProfileType">
+		<xs:attribute name="ReferenceYear" type="xs:integer"/>
+		<xs:attribute name="ReferenceMonth" type="xs:integer"/>
+		<xs:attribute name="CreditLimit" type="xs:integer"/>
+		<xs:attribute name="OutstandingBalance" type="xs:integer"/>
+		<xs:attribute name="NumberOfPaymentsPastDue" type="xs:integer"/>
+		<xs:attribute name="CreditStatus" type="xs:string"/>
+		<xs:attribute name="CreditStatusDesc" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="CBScoreType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="CBSGlocal" type="cb:CBSGlocalType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CBSGlocalType">
+		<xs:choice>
+			<xs:element name="ScoreData" type="cb:ScoreDataType" minOccurs="0"/>
+			<xs:element name="ExclusionRule" type="cb:ExclusionRulesType" minOccurs="0"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="CompanyInputType">
+		<xs:sequence>
+			<xs:element name="CompanyName" type="cb:CompanyNameType"/>
+			<xs:element name="Address" type="cb:AddressType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="IdentificationCode" type="cb:IdentificationCodeType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Contact" type="cb:ContactType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="EntityForm" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="CompanyLinkType">
+		<xs:attribute name="CBSubjectCode" type="xs:string"/>
+		<xs:attribute name="Name" type="xs:string"/>
+		<xs:attribute name="CompanyRole" type="xs:string"/>
+		<xs:attribute name="CompanyRoleDesc" type="xs:string"/>
+		<xs:attribute name="ProviderCounter" type="xs:string"/>
+		<xs:attribute name="LastUpdateDate" type="xs:date"/>
+		<xs:attribute name="ParentFlag" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="CompanyMatchedType">
+		<xs:sequence>
+			<xs:element name="CompanyName" type="cb:CompanyNameType" minOccurs="0"/>
+			<xs:element name="AddressHistory" type="cb:AddressHistoryType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="IdentificationCode" type="cb:IdentificationCodeMatchedType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Contact" type="cb:ContactMatchedType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SuspectImpersonation" type="cb:SuspectImpersonationType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="EntityForm" type="xs:string"/>
+		<xs:attribute name="EntityFormDesc" type="xs:string"/>
+		<xs:attribute name="LastUpdateDate" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="TradeNameType">
+		<xs:attribute name="TradeName" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="CompanyOutputType">
+		<xs:sequence>
+			<xs:element name="CompanyName" type="cb:CompanyNameType"/>
+			<xs:element name="Addresses" type="cb:AddressesOutputType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="IdentificationCode" type="cb:IdentificationCodeOutputType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Contact" type="cb:ContactOutputType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="EntityForm" type="xs:string"/>
+		<xs:attribute name="EntityFormDesc" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ContactDescType">
+		<xs:attribute name="TypeDesc" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ContactMatchedType">
+		<xs:sequence>
+			<xs:element name="Contact" type="cb:ContactType"/>
+			<xs:element name="ContactDesc" type="cb:ContactDescType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="LastUpdateDate" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="ContactOutputType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="Contact" type="cb:ContactType"/>
+			<xs:element name="ContactDesc" type="cb:ContactDescType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContactType">
+		<xs:attribute name="Type" type="xs:string"/>
+		<xs:attribute name="Value" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ContractsHistoryType">
+		<xs:sequence>
+			<xs:element name="AggregatedData" type="cb:AggregatedDataType"/>
+			<xs:element name="Instalments" type="cb:InstalmentsType" minOccurs="0"/>
+			<xs:element name="NonInstalments" type="cb:NonInstalmentsType" minOccurs="0"/>
+			<xs:element name="CreditCards" type="cb:CreditCardsType" minOccurs="0"/>
+			<xs:element name="FootPrints" type="cb:FootPrintsType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreditCardsGrantedType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="GrantedContract" type="cb:GrantedContractType"/>
+			<xs:element name="GrantedCard" type="cb:GrantedCardType"/>
+			<xs:element name="Maximum" type="cb:CardsMaximumType" minOccurs="0"/>
+			<xs:element name="Profile" type="cb:CardsProfileType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Guarantee" type="cb:GuaranteeType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="LinkedCIS" type="cb:LinkedCISType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Note" type="cb:NoteType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreditCardsNotGrantedType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="NotGrantedContract" type="cb:NotGrantedContractType"/>
+			<xs:element name="NotGrantedCard" type="cb:NotGrantedCardType"/>
+			<xs:element name="LinkedCIS" type="cb:LinkedCISType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Note" type="cb:NoteType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreditCardsType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="NumbersSummary" type="cb:NumbersSummaryType" minOccurs="0"/>
+			<xs:element name="AmountsSummary" type="cb:CardsAmountsSummaryType" minOccurs="0"/>
+			<xs:element name="NotGrantedContract" type="cb:CreditCardsNotGrantedType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="GrantedContract" type="cb:CreditCardsGrantedType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreditCardType">
+		<xs:attribute name="CreditAmountSought" type="xs:integer"/>
+	</xs:complexType>
+	<xs:complexType name="CreditReportType">
+		<xs:sequence>
+			<xs:element name="MatchedCIS" type="cb:MatchedCISType" maxOccurs="unbounded"/>
+			<xs:element name="ContractsHistory" type="cb:ContractsHistoryType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EmployerDataType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="CompanyName" type="cb:CompanyNameType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EmploymentDataDescType">
+		<xs:attribute name="OccupationStatusDesc" type="xs:string"/>
+		<xs:attribute name="CurrencyDesc"/>
+	</xs:complexType>
+	<xs:complexType name="EmploymentDataInputType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="EmployerData" type="cb:EmployerDataType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="GrossIncome" type="xs:string"/>
+		<xs:attribute name="Currency" type="xs:string"/>
+		<xs:attribute name="OccupationStatus" type="xs:string"/>
+		<xs:attribute name="DateHired" type="xs:date"/>
+		<xs:attribute name="Occupation" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="EmploymentDataMatchedType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="EmploymentData" type="cb:EmploymentDataType"/>
+			<xs:element name="EmploymentDataDesc" type="cb:EmploymentDataDescType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="LastUpdateDate" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="EmploymentDataOutputType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="EmploymentData" type="cb:EmploymentDataType"/>
+			<xs:element name="EmploymentDataDesc" type="cb:EmploymentDataDescType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EmploymentDataType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="EmployerData" type="cb:EmployerDataType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="GrossIncome" type="xs:integer"/>
+		<xs:attribute name="Currency"/>
+		<xs:attribute name="OccupationStatus" type="xs:string"/>
+		<xs:attribute name="DateHired" type="xs:date"/>
+		<xs:attribute name="Occupation" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ErrorsType">
+		<xs:attribute name="Code" type="xs:string" use="required"/>
+		<xs:attribute name="Description" type="xs:string" use="required"/>
+		<xs:attribute name="WrongValue" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ExclusionRulesType">
+		<xs:attribute name="Code"/>
+		<xs:attribute name="Description"/>
+	</xs:complexType>
+	<xs:complexType name="GrantedCardType">
+		<xs:attribute name="CreditLimit" type="xs:integer"/>
+		<xs:attribute name="PaymentFrequency" type="xs:string"/>
+		<xs:attribute name="PaymentFrequencyDesc" type="xs:string"/>
+		<xs:attribute name="PaymentMethod" type="xs:string"/>
+		<xs:attribute name="PaymentMethodDesc" type="xs:string"/>
+		<xs:attribute name="NextPaymentDue" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Next Due Instalment amount</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NextPaymentDate" type="xs:date"/>
+		<xs:attribute name="LastPaymentMade" type="xs:integer"/>
+		<xs:attribute name="OutstandingBalance" type="xs:integer"/>
+		<xs:attribute name="NumberOfPaymentsPastDue" type="xs:integer"/>
+		<xs:attribute name="ChargedAmount" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>ChargedAmountInTheMonth</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="LastChargeDate" type="xs:date"/>
+		<xs:attribute name="OverTheLimitAmount" type="xs:integer"/>
+		<xs:attribute name="OverTheLimitDate" type="xs:date"/>
+		<xs:attribute name="MinPaymentPercentage" type="xs:integer"/>
+		<xs:attribute name="ReorganisedCreditCode" type="xs:string"/>
+		<xs:attribute name="ReorganisedCreditCodeDesc" type="xs:string"/>
+		<xs:attribute name="ReorganisedCCRContractCode" type="xs:string"/>
+		<xs:attribute name="OriginalCCRContractCode" type="xs:string"/>
+		<xs:attribute name="ReorganisedCreditCodeDate" type="xs:date"/>
+		<xs:attribute name="LastPaymentDate" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="GrantedContractType">
+		<xs:attribute name="CCRContractCode" type="xs:string" use="required"/>
+		<xs:attribute name="CIPContractNo" type="xs:string"/>
+		<xs:attribute name="ProductType" type="xs:string" use="required"/>
+		<xs:attribute name="ProductTypeDesc" type="xs:string"/>
+		<xs:attribute name="ContractPhase" type="xs:string" use="required"/>
+		<xs:attribute name="ContractPhaseDesc" type="xs:string"/>
+		<xs:attribute name="RoleOfCIS" type="xs:string" use="required"/>
+		<xs:attribute name="RoleOfCISDesc" type="xs:string"/>
+		<xs:attribute name="ConsumerFlag" type="xs:string" use="required"/>
+		<xs:attribute name="ConsumerFlagDesc" type="xs:string"/>
+		<xs:attribute name="ContractStartDate" type="xs:date"/>
+		<xs:attribute name="ContractMaturityDate" type="xs:date"/>
+		<xs:attribute name="ContractActualEndDate" type="xs:date"/>
+		<xs:attribute name="LastUpdateDate" type="xs:date">
+			<xs:annotation>
+				<xs:documentation>Submission datLastUpdate</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="OriginalCurrency" type="xs:string"/>
+		<xs:attribute name="OriginalCurrencyDesc" type="xs:string"/>
+		<xs:attribute name="CIPCodeEncrypted" type="xs:string"/>
+		<xs:attribute name="MOFLinkCode" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="GrantedInstalmentType">
+		<xs:attribute name="FinancedAmount" type="xs:integer"/>
+		<xs:attribute name="TotalNumberOfPlannedPayments" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Total Number Of Instalments</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PaymentFrequency" type="xs:string"/>
+		<xs:attribute name="PaymentFrequencyDesc" type="xs:string"/>
+		<xs:attribute name="PaymentMethod" type="xs:string"/>
+		<xs:attribute name="PaymentMethodDesc" type="xs:string"/>
+		<xs:attribute name="NextPaymentDue" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Next Due Instalment amount</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NextPaymentDate" type="xs:date"/>
+		<xs:attribute name="FirstPaymentDate" type="xs:date"/>
+		<xs:attribute name="LastPaymentMade" type="xs:integer"/>
+		<xs:attribute name="OutstandingBalance" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>RemainingAmoiunt including any past due amount </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NumberOfPaymentsPastDue" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation> past due payments</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ReorganisedCreditCode" type="xs:string"/>
+		<xs:attribute name="ReorganisedCreditCodeDesc" type="xs:string"/>
+		<xs:attribute name="ReorganisedCreditCodeDate" type="xs:date"/>
+		<xs:attribute name="ReorganisedCCRContractCode" type="xs:string"/>
+		<xs:attribute name="OriginalCCRContractCode" type="xs:string"/>
+		<xs:attribute name="LastPaymentDate" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="GrantedNonInstalmentType">
+		<xs:attribute name="CreditLimit" type="xs:integer"/>
+		<xs:attribute name="OutstandingBalance" type="xs:integer"/>
+		<xs:attribute name="ReorganisedCreditCode" type="xs:string"/>
+		<xs:attribute name="ReorganisedCreditCodeDesc" type="xs:string"/>
+		<xs:attribute name="ReorganisedCreditCodeDate" type="xs:date"/>
+		<xs:attribute name="ReorganisedCCRContractCode" type="xs:string"/>
+		<xs:attribute name="OriginalCCRContractCode" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="GuaranteeType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="Real" type="cb:RealGuaranteeType" minOccurs="0"/>
+			<xs:element name="Personal" type="cb:PersonalGuaranteeType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="CCRCISCode" type="xs:string"/>
+		<xs:attribute name="GuarantorName" type="xs:string"/>
+		<xs:attribute name="ValidityStartDate" type="xs:date"/>
+		<xs:attribute name="ValidityEndDate" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="IDDescType">
+		<xs:attribute name="TypeDesc" type="xs:string"/>
+		<xs:attribute name="IssueCountryDesc" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="IdentificationCodeDescType">
+		<xs:attribute name="TypeDesc" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="IdentificationCodeMatchedType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="IdentificationCode" type="cb:IdentificationCodeType"/>
+			<xs:element name="IdentificationCodeDesc" type="cb:IdentificationCodeDescType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="LastUpdateDate" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="IdentificationCodeOutputType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="IdentificationCode" type="cb:IdentificationCodeType"/>
+			<xs:element name="IdentificationCodeDesc" type="cb:IdentificationCodeDescType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IdentificationCodeType">
+		<xs:attribute name="Type" type="xs:string"/>
+		<xs:attribute name="Number" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="IDInputType">
+		<xs:attribute name="Type" type="xs:string"/>
+		<xs:attribute name="Number" type="xs:string"/>
+		<xs:attribute name="IssueDate" type="xs:date"/>
+		<xs:attribute name="IssueCountry" type="xs:string"/>
+		<xs:attribute name="ExpiryDate" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="IDMatchedType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="ID" type="cb:IDType"/>
+			<xs:element name="IDDesc" type="cb:IDDescType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="LastUpdateDate" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="IDOutputType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="ID" type="cb:IDType"/>
+			<xs:element name="IDDesc" type="cb:IDDescType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IDType">
+		<xs:attribute name="Type" type="xs:string"/>
+		<xs:attribute name="Number" type="xs:string"/>
+		<xs:attribute name="IssueDate" type="xs:date"/>
+		<xs:attribute name="IssueCountry" type="xs:string"/>
+		<xs:attribute name="ExpiryDate" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="IndividualInputType">
+		<xs:sequence>
+			<xs:element name="IndividualName" type="cb:IndividualNameType" minOccurs="0"/>
+			<xs:element name="BirthData" type="cb:BirthDataInputType" minOccurs="0"/>
+			<xs:element name="Address" type="cb:AddressType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="IdentificationCode" type="cb:IdentificationCodeType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Contact" type="cb:ContactType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SoleTraderData" type="cb:SoleTraderDataType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="Gender" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="IndividualMatchedType">
+		<xs:sequence>
+			<xs:element name="IndividualName" type="cb:IndividualNameType" minOccurs="0"/>
+			<xs:element name="BirthData" type="cb:BirthDataOutputType" minOccurs="0"/>
+			<xs:element name="AddressHistory" type="cb:AddressHistoryType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SoleTraderData" type="cb:SoleTraderDataMatchedType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SuspectImpersonation" type="cb:SuspectImpersonationType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="Gender" type="xs:string"/>
+		<xs:attribute name="GenderDesc" type="xs:string"/>
+		<xs:attribute name="DeceasedAlert" type="xs:string"/>
+		<xs:attribute name="DeceasedAlertDesc" type="xs:string"/>
+		<xs:attribute name="LastUpdateDate" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="IndividualNameType">
+		<xs:attribute name="ForeName" type="xs:string"/>
+		<xs:attribute name="SurName" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="IndividualOutputType">
+		<xs:sequence>
+			<xs:element name="IndividualName" type="cb:IndividualNameType" minOccurs="0"/>
+			<xs:element name="BirthData" type="cb:BirthDataOutputType" minOccurs="0"/>
+			<xs:element name="Addresses" type="cb:AddressesOutputType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="IdentificationCode" type="cb:IdentificationCodeOutputType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Contact" type="cb:ContactOutputType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SoleTraderData" type="cb:SoleTraderDataOutputType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="Gender" type="xs:string"/>
+		<xs:attribute name="GenderDesc" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="InstalmentsGrantedType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="GrantedContract" type="cb:GrantedContractType"/>
+			<xs:element name="GrantedInstalment" type="cb:GrantedInstalmentType"/>
+			<xs:element name="Maximum" type="cb:InstMaximumType" minOccurs="0"/>
+			<xs:element name="Profile" type="cb:InstProfileType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Guarantee" type="cb:GuaranteeType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="LinkedCIS" type="cb:LinkedCISType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Note" type="cb:NoteType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InstalmentsNotGrantedType">
+		<xs:sequence>
+			<xs:element name="NotGrantedContract" type="cb:NotGrantedContractType"/>
+			<xs:element name="NotGrantedInstalment" type="cb:NotGrantedInstalmentType"/>
+			<xs:element name="LinkedCIS" type="cb:LinkedCISType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Note" type="cb:NoteType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InstalmentsType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="NumbersSummary" type="cb:NumbersSummaryType" minOccurs="0"/>
+			<xs:element name="AmountsSummary" type="cb:InstAmountsSummaryType" minOccurs="0"/>
+			<xs:element name="NotGrantedContract" type="cb:InstalmentsNotGrantedType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="GrantedContract" type="cb:InstalmentsGrantedType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InstalmentType">
+		<xs:attribute name="CreditAmountSought" type="xs:integer"/>
+	</xs:complexType>
+	<xs:complexType name="InstAmountsSummaryType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="BCAmounts" type="cb:InstAmountsType" minOccurs="0"/>
+			<xs:element name="GAmounts" type="cb:InstAmountsType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="NumberOfContracts" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Number of contracts used to calculate amounts</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="InstAmountsType">
+		<xs:attribute name="FinancedAmount" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Total Financed Amount</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="OutstandingBalance" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Total Outstanding Balance Amount</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="InstMaximumType">
+		<xs:attribute name="MaxOverduePaymentsNumber" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Maximum overdue Instalments number; max level of default</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="MaxOverduePaymentsNumberDate" type="xs:date"/>
+		<xs:attribute name="LastCreditStatus" type="xs:string"/>
+		<xs:attribute name="LastCreditStatusDesc" type="xs:string"/>
+		<xs:attribute name="LastCreditStatusDate" type="xs:date"/>
+		<xs:attribute name="LastRestructureEvent" type="xs:string"/>
+		<xs:attribute name="LastRestructureEventDesc" type="xs:string"/>
+		<xs:attribute name="LastRestructureEventDate" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="InstProfileType">
+		<xs:attribute name="ReferenceYear" type="xs:integer"/>
+		<xs:attribute name="ReferenceMonth" type="xs:integer"/>
+		<xs:attribute name="OutstandingBalance" type="xs:integer"/>
+		<xs:attribute name="NumberOfPaymentsPastDue" type="xs:integer"/>
+		<xs:attribute name="CreditStatus" type="xs:string"/>
+		<xs:attribute name="CreditStatusDesc" type="xs:string"/>
+		<xs:attribute name="RestructureEvent" type="xs:string"/>
+		<xs:attribute name="RestructureEventDesc" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="LinkedCISType">
+		<xs:attribute name="RoleOfCIS" type="xs:string"/>
+		<xs:attribute name="RoleOfCISDesc" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="MatchedCISType">
+		<xs:choice>
+			<xs:element name="Individual" type="cb:IndividualMatchedType"/>
+			<xs:element name="Company" type="cb:CompanyMatchedType"/>
+		</xs:choice>
+		<xs:attribute name="CCRCISCode" type="xs:string" use="required"/>
+		<xs:attribute name="FlagMatched" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="MessageIdOutputType">
+		<xs:attribute name="CBSMessageId" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="NonInstalmentsGrantedType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="GrantedContract" type="cb:GrantedContractType"/>
+			<xs:element name="GrantedNonInstalment" type="cb:GrantedNonInstalmentType"/>
+			<xs:element name="Maximum" type="cb:NonInstMaximumType" minOccurs="0"/>
+			<xs:element name="Profile" type="cb:NonInstProfileType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Guarantee" type="cb:GuaranteeType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="LinkedCIS" type="cb:LinkedCISType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Note" type="cb:NoteType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NonInstalmentsNotGrantedType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="NotGrantedContract" type="cb:NotGrantedContractType"/>
+			<xs:element name="NotGrantedNonInstalment" type="cb:NotGrantedNonInstalmentType"/>
+			<xs:element name="LinkedCIS" type="cb:LinkedCISType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Note" type="cb:NoteType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NonInstalmentsType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="NumbersSummary" type="cb:NumbersSummaryType" minOccurs="0"/>
+			<xs:element name="AmountsSummary" type="cb:NonInstAmountsSummaryType" minOccurs="0"/>
+			<xs:element name="NotGrantedContract" type="cb:NonInstalmentsNotGrantedType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="GrantedContract" type="cb:NonInstalmentsGrantedType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NonInstalmentType">
+		<xs:attribute name="CreditAmountSought" type="xs:integer"/>
+	</xs:complexType>
+	<xs:complexType name="NonInstAmountsSummaryType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="BCAmounts" type="cb:NonInstAmountsType"/>
+			<xs:element name="GAmounts" type="cb:NonInstAmountsType"/>
+		</xs:sequence>
+		<xs:attribute name="NumberOfContracts" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Number of contracts used to calculate amounts</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="NonInstAmountsType">
+		<xs:attribute name="CreditLimit" type="xs:integer"/>
+		<xs:attribute name="OutstandingBalance" type="xs:integer"/>
+		<xs:attribute name="OverdraftExcess" type="xs:integer"/>
+	</xs:complexType>
+	<xs:complexType name="NonInstMaximumType">
+		<xs:attribute name="LastCreditStatus" type="xs:string"/>
+		<xs:attribute name="LastCreditStatusDesc" type="xs:string"/>
+		<xs:attribute name="LastCreditStatusDate" type="xs:date"/>
+		<xs:attribute name="LastRestructureEvent" type="xs:string"/>
+		<xs:attribute name="LastRestructureEventDesc" type="xs:string"/>
+		<xs:attribute name="LastRestructureEventDate" type="xs:date"/>
+		<xs:attribute name="MaxOverdraftExcess" type="xs:integer"/>
+		<xs:attribute name="MaxOverdraftExcessDate" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="NonInstProfileType">
+		<xs:attribute name="ReferenceYear" type="xs:integer"/>
+		<xs:attribute name="ReferenceMonth" type="xs:integer"/>
+		<xs:attribute name="CreditLimit" type="xs:integer"/>
+		<xs:attribute name="OutstandingBalance" type="xs:integer"/>
+		<xs:attribute name="OverdraftExcess" type="xs:integer"/>
+		<xs:attribute name="CreditStatus" type="xs:string"/>
+		<xs:attribute name="CreditStatusDesc" type="xs:string"/>
+		<xs:attribute name="RestructureEvent" type="xs:string"/>
+		<xs:attribute name="RestructureEventDesc" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="NoteType">
+		<xs:attribute name="Type" type="xs:string"/>
+		<xs:attribute name="TypeDesc" type="xs:string"/>
+		<xs:attribute name="Text" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="NotGrantedCardType">
+		<xs:attribute name="CreditAmountSought" type="xs:integer"/>
+	</xs:complexType>
+	<xs:complexType name="NotGrantedContractType">
+		<xs:attribute name="CCRContractCode" type="xs:string" use="required"/>
+		<xs:attribute name="CIPContractNo" type="xs:string"/>
+		<xs:attribute name="ProductType" type="xs:string" use="required"/>
+		<xs:attribute name="ProductTypeDesc" type="xs:string"/>
+		<xs:attribute name="ContractPhase" type="xs:string" use="required"/>
+		<xs:attribute name="ContractPhaseDesc" type="xs:string"/>
+		<xs:attribute name="RoleOfCIS" type="xs:string" use="required"/>
+		<xs:attribute name="RoleOfCISDesc" type="xs:string"/>
+		<xs:attribute name="ConsumerFlag" type="xs:string" use="required"/>
+		<xs:attribute name="ConsumerFlagDesc" type="xs:string"/>
+		<xs:attribute name="ContractRequestDate" type="xs:date"/>
+		<xs:attribute name="LastUpdateDate" type="xs:date"/>
+		<xs:attribute name="CIPCodeEncrypted" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="NotGrantedInstalmentType">
+		<xs:attribute name="CreditAmountSought" type="xs:integer"/>
+	</xs:complexType>
+	<xs:complexType name="NotGrantedNonInstalmentType">
+		<xs:attribute name="CreditAmountSought" type="xs:integer"/>
+	</xs:complexType>
+	<xs:complexType name="NumbersSummaryType">
+		<xs:attribute name="Requested" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Numebr of requested contracts</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Active" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Numebr of active contracts</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Closed" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Numebr of closed contracts</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Approved" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Number of MOF approved contracts</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="PersonalGuaranteeType">
+		<xs:attribute name="PersonalGuaranteeCode" type="xs:string"/>
+		<xs:attribute name="PersonalGuaranteeDesc" type="xs:string"/>
+		<xs:attribute name="PersonalRecourseTypeCode" type="xs:string"/>
+		<xs:attribute name="PersonalRecourseTypeCodeDesc" type="xs:string"/>
+		<xs:attribute name="PersonalRecourseAmount" type="xs:integer"/>
+	</xs:complexType>
+	<xs:complexType name="RealGuaranteeType">
+		<xs:attribute name="RealGuaranteeCode" type="xs:string"/>
+		<xs:attribute name="RealGuaranteeDesc" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ScoreFactorType">
+		<xs:attribute name="Code"/>
+		<xs:attribute name="Description"/>
+		<xs:attribute name="Value"/>
+	</xs:complexType>
+	<xs:complexType name="ScoreMessageType">
+		<xs:attribute name="Code"/>
+		<xs:attribute name="Description"/>
+	</xs:complexType>
+	<xs:complexType name="ScoreDataType">
+		<xs:attribute name="ScoreRaw"/>
+		<xs:attribute name="ScoreRange"/>
+	</xs:complexType>
+	<xs:complexType name="SoleTraderDataMatchedType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="TradeName" type="cb:TradeNameType" minOccurs="0"/>
+			<xs:element name="AddressHistory" type="cb:AddressHistoryType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="LastUpdateDate" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="SoleTraderDataOutputType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="TradeName" type="cb:TradeNameType"/>
+			<xs:element name="Addresses" type="cb:AddressesOutputType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="IdentificationCode" type="cb:IdentificationCodeOutputType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Contact" type="cb:ContactOutputType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SoleTraderDataType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="TradeName" type="cb:TradeNameType"/>
+			<xs:element name="Address" type="cb:AddressType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="IdentificationCode" type="cb:IdentificationCodeType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Contact" type="cb:ContactType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CISOutputType">
+		<xs:choice>
+			<xs:element name="Individual" type="cb:IndividualOutputType" minOccurs="0"/>
+			<xs:element name="Company" type="cb:CompanyOutputType" minOccurs="0"/>
+		</xs:choice>
+		<xs:attribute name="ProviderCISNo" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="CompanyNameType">
+		<xs:attribute name="EntityLegalName" type="xs:string"/>
+		<xs:attribute name="EntityBusinessName" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ImpersonationFlagType">
+		<xs:attribute name="ImpersonationFlag" type="xs:string"/>
+		<xs:attribute name="StartValidityDate" type="xs:date"/>
+	</xs:complexType>
+	<xs:complexType name="ImpersonationFlagDescType">
+		<xs:attribute name="ImpersonationFlagDesc" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="SuspectImpersonationType">
+		<xs:sequence>
+			<xs:element name="ImpersonationFlag" type="cb:ImpersonationFlagType"/>
+			<xs:element name="ImpersonationFlagDesc" type="cb:ImpersonationFlagDescType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FootPrintType">
+		<xs:attribute name="FunctionCode" type="xs:string"/>
+		<xs:attribute name="FunctionCodeDesc" type="xs:string"/>
+		<xs:attribute name="PurposeTypeCode" type="xs:string"/>
+		<xs:attribute name="PurposeTypeCodeDesc" type="xs:string"/>
+		<xs:attribute name="EnquiryDate" type="xs:date"/>
+		<xs:attribute name="CIPCodeEncrypted" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="FootPrintsType">
+		<xs:sequence>
+			<xs:element name="FootPrint" type="cb:FootPrintType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
