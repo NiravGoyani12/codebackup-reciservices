@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 (x64) (http://www.altova.com) by Vincenzo Iafelice (Crif SpA) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cg="urn:crif-CrifGate:2:1" targetNamespace="urn:crif-CrifGate:2:1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="CG_RES">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Info">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Status" type="xs:string"/>
+							<xs:element name="Error" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Code" type="xs:string"/>
+										<xs:element name="Detail" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="RequestTime" type="xs:dateTime" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>DateTime when the entire request incomes in CrifGate</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="ResponseTime" type="xs:dateTime" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>DateTime when the entire response is returned to the client</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Response" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="RequestID" type="xs:string"/>
+							<xs:element name="Status" type="xs:string"/>
+							<xs:choice>
+								<xs:element name="Detail">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="DetailID" type="xs:string"/>
+											<xs:element name="Status" type="xs:string"/>
+											<xs:element name="Service" type="xs:string"/>
+											<xs:element name="Process" type="xs:string"/>
+											<xs:element name="ContentType" type="xs:string" minOccurs="0"/>
+											<xs:element name="Content" type="xs:string" minOccurs="0"/>
+											<xs:element name="FromArchive" type="xs:boolean" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Defines if the request is retained</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="OriginalRequestTime" type="xs:dateTime" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Represents the original time of the retained request</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="RequestTime" type="xs:dateTime" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>DateTime when the service request is sent to the DataSource</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="ResponseTime" type="xs:dateTime" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>DateTime when the service responce is received from the DataSource</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="ACE" type="xs:string" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Codice Anagrafico Da Ente</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Error">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Code" type="xs:string"/>
+											<xs:element name="Detail" type="xs:string"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:choice>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,415 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>rcidirect-core</artifactId>
+	<packaging>pom</packaging>
+
+	<parent>
+		<groupId>com.rcibanque.rcidirect</groupId>
+		<artifactId>Services</artifactId>
+		<version>2.28.0-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+		<maven.source.plugin.version>3.0.1</maven.source.plugin.version>
+		<maven.release.plugin.version>2.5.3</maven.release.plugin.version>
+		<maven.site.plugin.version>3.7.1</maven.site.plugin.version>
+		<maven.project.info.reports.plugin.version>3.0.0</maven.project.info.reports.plugin.version>
+		<maven.deploy.plugin.version>3.0.0-M1</maven.deploy.plugin.version>
+		<maven.surefire.plugin.version>2.22.1</maven.surefire.plugin.version>
+		<maven.sonar.plugin.version>3.7.0.1746</maven.sonar.plugin.version>
+		<maven.jacoco.plugin.version>0.8.2</maven.jacoco.plugin.version>
+		<!-- Spring -->
+		<spring.framework.version>5.2.1.RELEASE</spring.framework.version>
+		<spring.security.version>5.2.1.RELEASE</spring.security.version>
+		<!-- Apache -->
+		<apache.commons.lang.version>3.8.1</apache.commons.lang.version>
+		<apache.commons.text.version>1.6</apache.commons.text.version>
+		<apache.commons.collections.version>4.3</apache.commons.collections.version>
+		<apache.commons.io.version>2.6</apache.commons.io.version>
+		<apache.commons.codec.version>1.13</apache.commons.codec.version>
+		<apache.commons.validator.version>1.6</apache.commons.validator.version>
+		<apache.commons.email.version>1.5</apache.commons.email.version>
+		<apache.commons.fileupload.version>1.4</apache.commons.fileupload.version>
+		<apache.http.version>4.5.6</apache.http.version>
+		<apache.poi.version>4.0.1</apache.poi.version>
+		<!-- Other -->
+		<jackson.version>2.10.1</jackson.version>
+		<org.sl4j.version>1.7.26</org.sl4j.version>
+		<swagger.version>2.7.0</swagger.version>
+		<javax.jms.version>2.0.1</javax.jms.version>
+		<!-- Scope 'test' and 'provided' -->
+		<mockito.version>2.23.0</mockito.version>
+		<assertj.version>3.12.2</assertj.version>
+		<jupiter.version>5.4.2</jupiter.version>
+		<jupiter.platfrom.launcher.version>1.4.2</jupiter.platfrom.launcher.version>
+		<hamcrest.version>2.1</hamcrest.version>
+		<java.servlet.version>3.0.1</java.servlet.version> <!-- Apache Tomcat 7 = servlet 3.0 / Apache Tomcat 8.5 = servlet 3.1 -->
+		<!-- Default jvm arg required for surefire which can be overriden i.e. by jenkins -->
+		<default.jvm.args>-Drcidirect.market=uk -Duser.timezone=Europe/London</default.jvm.args> 
+	</properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven.compiler.plugin.version}</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+						<debug>true</debug>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${maven.source.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${maven.release.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>${maven.site.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>${maven.project.info.reports.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${maven.deploy.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven.surefire.plugin.version}</version>
+					<configuration>
+						<argLine>@{argLine} @{default.jvm.args}</argLine>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>${maven.sonar.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${maven.jacoco.plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>prepare-agent-integration</id>
+						<phase>test</phase>
+						<goals>
+							<goal>prepare-agent-integration</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report-integration</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report-integration</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<scope>provided</scope>
+			<version>${spring.framework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<scope>provided</scope>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<scope>provided</scope>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<scope>provided</scope>
+			<version>${spring.framework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<scope>provided</scope>
+			<version>${spring.framework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+			<version>${spring.framework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<!-- Libraries -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+			<version>${java.servlet.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<!-- Libraries -->
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter</artifactId>
+				<version>${jupiter.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-launcher</artifactId>
+				<version>${jupiter.platfrom.launcher.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>${mockito.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.assertj</groupId>
+				<artifactId>assertj-core</artifactId>
+				<version>${assertj.version}</version>
+			</dependency>
+
+			<dependency>
+			    <groupId>org.hamcrest</groupId>
+			    <artifactId>hamcrest</artifactId>
+				<version>${hamcrest.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${apache.commons.lang.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-text</artifactId>
+				<version>${apache.commons.text.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-collections4</artifactId>
+				<version>${apache.commons.collections.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>${apache.commons.fileupload.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${apache.commons.io.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>${apache.commons.codec.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-validator</groupId>
+				<artifactId>commons-validator</artifactId>
+				<version>${apache.commons.validator.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-email</artifactId>
+				<version>${apache.commons.email.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>${apache.http.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>${apache.poi.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${org.sl4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${org.sl4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>${swagger.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.jms</groupId>
+				<artifactId>javax.jms-api</artifactId>
+				<version>${javax.jms.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<modules>
+
+		<module>rcidirect-core-config</module>
+		<module>rcidirect-core-main</module>
+		<module>rcidirect-core-property</module>
+		<module>rcidirect-core-rest</module>
+		<module>rcidirect-core-system</module>
+		<module>rcidirect-core-test</module>
+		<module>rcidirect-core-user</module>
+		<module>rcidirect-core-validation</module>
+		<module>rcidirect-core-xls</module>
+		<module>rcidirect-core-messaging</module>
+
+	</modules>
+
+	<repositories>
+		<repository>
+			<id>nexus-public</id>
+			<name>public</name>
+			<url>http://jks-prd-core.rci.uk/nexus/content/repositories/public/</url>
+		</repository>
+	</repositories>
+	<distributionManagement>
+		<repository>
+			<id>nexus-releases</id>
+			<name>releases</name>
+			<url>http://jks-prd-core.rci.uk/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<name>snapshots</name>
+			<url>http://jks-prd-core.rci.uk/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+</project>

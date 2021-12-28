@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cg:CG_Req_Invoke xmlns:cg="urn:crif-CrifGate:2:1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:crif-CrifGate:2:1 CrifGate_Request_Invoke.xsd ">
+  <cg:Auth pwd="" usr=""/>
+  <cg:Request>
+    <cg:Content>cg:Content</cg:Content>
+    <cg:Params>
+      <cg:Param>
+        <cg:ServiceID>cg:ServiceID</cg:ServiceID>
+        <cg:ProcessID>cg:ProcessID</cg:ProcessID>
+      </cg:Param>
+    </cg:Params>
+  </cg:Request>
+</cg:CG_Req_Invoke>
